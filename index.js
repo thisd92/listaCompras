@@ -14,7 +14,6 @@ btnClearAll.addEventListener('click', clearAll);
 function addItem(e) {
     e.preventDefault()
     validateForm();
-    
 }
 
 
@@ -22,15 +21,21 @@ function validateForm() {
     const item = inputItem.value;
     showMessage(item)
     if (item) {
-        const itemList = document.createElement("div");
-        itemList.classList.add("item");
-        clearInput();
-        itemList.innerHTML = `
-        <p>${item}</p><div><button id='btnClear' onclick='deleteItem()' class='clearBtn'><i class="fas fa-trash"></i></button></div>`
-        divList.appendChild(itemList);
+        createItem(item);
         btnClearAll.style.visibility = "visible";
         addLocalStorage(item);
+        clearInput();
     }
+}
+
+function createItem(item){
+    const itemList = document.createElement("div");
+    itemList.classList.add("item");
+    itemList.innerHTML = `
+    <p>${item}</p><div><button class='clearBtn'><i class="fas fa-trash"></i></button></div>`
+    const btnDelete = itemList.querySelector(".clearBtn");
+    btnDelete.addEventListener('click', deleteItem);
+    divList.appendChild(itemList);
 }
 
 const showMessage = (hasItem) => {
@@ -53,8 +58,9 @@ function clearInput() {
     inputItem.value = "";
 }
 
-function deleteItem() {
-    console.log("funciona");
+function deleteItem(e) {
+    const el = e.currentTarget.parentElement.parentElement;
+    divList.removeChild(el);
 }
 
 function clearAll(){

@@ -19,17 +19,21 @@ function addItem(e) {
 
 function validateForm() {
     const item = inputItem.value;
+    const id = new Date().getTime().toString();
     showMessage(item)
     if (item) {
-        createItem(item);
+        createItem(id, item);
         btnClearAll.style.visibility = "visible";
-        addLocalStorage(item);
+        addLocalStorage(id, item);
         clearInput();
     }
 }
 
-function createItem(item){
+function createItem(id, item) {
     const itemList = document.createElement("div");
+    let attr = document.createAttribute("data-id");
+    attr.value = id;
+    itemList.setAttributeNode(attr);
     itemList.classList.add("item");
     itemList.innerHTML = `
     <p>${item}</p><div><button class='clearBtn'><i class="fas fa-trash"></i></button></div>`
@@ -50,7 +54,7 @@ const showMessage = (hasItem) => {
         setTimeout(() => {
             divAlert.removeChild(divAlert.firstChild);
         }, 3000);
-        
+
     }
 }
 
@@ -60,22 +64,59 @@ function clearInput() {
 
 function deleteItem(e) {
     const el = e.currentTarget.parentElement.parentElement;
+    const id = el.dataset.id;
+
     divList.removeChild(el);
+
+    removeFromLocalStorage(id)
 }
 
-function clearAll(){
+function clearAll() {
     const items = document.querySelectorAll(".item");
-    
-    if(items.length > 0){
+
+    if (items.length > 0) {
         items.forEach((item) => {
             divList.removeChild(item);
         });
     }
 
     btnClearAll.style.visibility = "hidden";
-    // localStorage.removeItem('list');
+    localStorage.removeItem('list');
 }
 
-function addLocalStorage(item){
-    console.log("added");
+function addLocalStorage(id, item) {
+    const listItems = { id, item };
+    let items = getLocalStorage();
+    items.push(listItems);
+    localStorage.setItem("list", JSON.stringify(items));
 }
+
+function getLocalStorage() {
+    return localStorage.getItem("list") ? JSON.parse(localStorage.getItem("list")) : [];
+}
+
+
+function removeFromLocalStorage(id) {
+    let items = getLocalStorage();
+
+    items = items.filter(function (item) {
+        if (item.id !== id) {
+            return item;
+        }
+    });
+
+    localStorage.setItem("list", JSON.stringify(items));
+}
+
+function setupItems() {
+    let items = getLocalStorage();
+
+    if (items.length > 0) {
+        items.forEach((item) => {
+            createItem(item.id, item.item);
+        });
+        btnClearAll.style.visibility = "visible";
+    }
+}
+
+window.onload(setupItems());

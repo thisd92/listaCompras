@@ -66,8 +66,14 @@
 
 .list div{
     display: flex;
+    padding: 1px;
 }
 
 .list div p{
     width: 80%;
+}
+
+.divBtn{
+    visibility: hidden;
+    margin-bottom: 20px;
 }

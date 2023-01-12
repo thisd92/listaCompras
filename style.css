@@ -24,7 +24,6 @@
 }
 
 .success{
-    display: none;
     font-size: 14px;
     margin-bottom: 10px;
     padding: 4px;
@@ -33,7 +32,6 @@
 }
 
 .error{
-    display: none;
     font-size: 14px;
     margin-bottom: 10px;
     padding: 4px;
@@ -62,11 +60,14 @@
 }
 
 .list{
-    display: flex;
-    flex-direction: column;
+    width: 50%;
+    margin-bottom: 20px;
 }
 
 .list div{
     display: flex;
-    flex-direction: row;
+}
+
+.list div p{
+    width: 80%;
 }

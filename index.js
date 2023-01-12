@@ -1,11 +1,12 @@
 const inputItem = document.getElementById("inputItem");
 const btnSubmit = document.getElementById("btnSubmit");
-const div = document.getElementById("divAlert");
-const list = document.getElementById("list");
+const divAlert = document.getElementById("divAlert");
+const divList = document.getElementById("container-list");
 
-let item = "";
+const successMsg = "<div id='alert' class='divAlert success'><span>" + "Item adicionado com sucesso!" + "</span></div>";
+const errorMsg = "<div id='alert' class='divAlert error'><span>Por favor, preencha o campo para adicionar um item!</span></div>";
 
-btnSubmit.addEventListener('click', addItem)
+
 btnSubmit.addEventListener('click', addItem)
 
 function addItem(e) {
@@ -15,30 +16,27 @@ function addItem(e) {
 
 
 function validateForm() {
-    setMessage(inputItem.value)
-    if (inputItem.value) {
-        item = inputItem.value;
+    const item = inputItem.value;
+    showMessage(item)
+    if (item) {
+        const itemList = document.createElement("div");
         clearInput();
-        list.innerHTML += 
-                        "<div><p>" + item + "</p><button class='clearBtn'>Clear</button></div>"
-        console.log(item);
+        itemList.innerHTML = `
+        <p>${item}</p><div><button class='clearBtn'><i class="fas fa-trash"></i></button></div>`
+        divList.appendChild(itemList);
     }
 };
 
-const setMessage = (item) => {
-    if(item){
-        div.className = "success"
-        div.innerHTML = "<span>" + "Item adicionado com sucesso!" + "</span>";
-        div.style.display = "block";
+const showMessage = (hasItem) => {
+    if (hasItem) {
+        divAlert.innerHTML = successMsg;
         setTimeout(() => {
-            div.style.display = "none";
+            divAlert.removeChild(divAlert.firstChild);
         }, 3000);
-    }else{
-        div.style.display = "block";
-        div.className = "error"
-        div.innerHTML = "<span>" + "Por favor, preencha o campo para adicionar um item!" + "</span>";
+    } else {
+        divAlert.innerHTML = errorMsg;
         setTimeout(() => {
-            div.style.display = "none";
+            divAlert.removeChild(divAlert.firstChild);
         }, 3000);
 
     }
@@ -48,6 +46,6 @@ function clearInput() {
     inputItem.value = "";
 }
 
-function deleteItem(){
+function deleteItem() {
 
 }

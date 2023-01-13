@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,14 +9,25 @@
     <script src="https://kit.fontawesome.com/a7fd021888.js" crossorigin="anonymous"></script>
     <title>Lista de Compras</title>
 </head>
+
 <body>
+    <!-- LINK TO HOMEPAGE -->
+    <div id="link" class="container-a">
+        <a href="../"><i class="fa-solid fa-house"></i> Home</a>
+    </div>
+
+    <!-- CARDLIST -->
     <div class="card" id="cardList">
         <h1>Lista de Compras</h1>
+        <!-- DIV WHERE APPEAR THE ALERT MESSAGE -->
         <div id="divAlert"></div>
         <form action="">
-            <input id="inputItem" type="text" placeholder="Digite um item">
-            <button id="btnSubmit">Adicionar</button>
+            <div class="form-control">
+                <input id="inputItem" type="text" placeholder="Digite um item">
+                <button id="btnSubmit">Adicionar</button>
+            </div>
         </form>
+        <!-- DIV WHERE GOING TO APPEAR THE ITEMS ADD -->
         <div id="container-list" class="list"></div>
         <div class="divBtn">
             <button id="clearAll">Limpar Itens</button>
@@ -24,4 +36,5 @@
 
     <script src="./index.js"></script>
 </body>
+
 </html>

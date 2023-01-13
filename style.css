@@ -7,10 +7,23 @@
     box-sizing: border-box;
 }
 
+/* LINK TO HOMEPAGE */
+
+.container-a{
+    padding: 5px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+/* CARD LIST */
+
 .card{
     display: flex;
     align-items: center;
-    width: 500px;
+    width: 40%;
     height: 100%;
     margin: 80px auto;
     flex-direction: column;
@@ -23,6 +36,7 @@
     text-align: center;
 }
 
+/* CLASS SUCCESS MSG */
 .success{
     font-size: 14px;
     margin-bottom: 10px;
@@ -31,6 +45,7 @@
     border-radius: 5px;
 }
 
+/* CLASS ERROR MSG */
 .error{
     font-size: 14px;
     margin-bottom: 10px;
@@ -45,8 +60,14 @@
     display: flex;
 }
 
+.form-control{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
 .card input{
-    width: 90%;
+    width: 80%;
     padding: 3px;
     margin-right: 10px;
 }
@@ -77,3 +98,59 @@
     visibility: hidden;
     margin-bottom: 20px;
 }
+
+footer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #343a40;
+    height: 80px;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid black;
+  }
+  
+  .logo img{
+    width: 80px;
+  }
+  
+  .container-social{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container-social a{
+    padding: 3px;
+  }
+
+  /* RESPONSIVE CARD */
+
+  @media(max-width: 1400px){
+    .card{
+        width: 65%;
+    }
+  }
+
+  @media(max-width: 1000px){
+    .card{
+        width: 70%;
+    }
+  }
+
+  @media(max-width: 700px){
+    .card{
+        width: 90%;
+    }
+  }
+
+  @media(max-width: 550px){
+    .card{
+        width: 100%;
+    }
+
+    .card input{
+        width: 100%;
+    }
+  }

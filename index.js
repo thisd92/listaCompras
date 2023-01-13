@@ -1,3 +1,5 @@
+// IDENTIFIED ELEMENTS
+
 const inputItem = document.getElementById("inputItem");
 const btnSubmit = document.getElementById("btnSubmit");
 const divAlert = document.getElementById("divAlert");
@@ -6,8 +8,10 @@ const btnClear = document.getElementById("btnClear");
 const btnClearAll = document.getElementById("clearAll");
 const cardList = document.getElementById("cardList")
 
+// CREATED ERROR MSG
 const errorMsg = "<div id='alert' class='divAlert error'><span>Por favor, preencha o campo para adicionar um item!</span></div>";
 
+// EVENTLISTNERS
 btnSubmit.addEventListener('click', addItem);
 btnClearAll.addEventListener('click', clearAll);
 
@@ -16,7 +20,7 @@ function addItem(e) {
     validateForm();
 }
 
-
+// VALIDATE IF THE INPUT VALUE ISN'T ""/FALSE
 function validateForm() {
     const item = inputItem.value;
     const id = new Date().getTime().toString();
@@ -29,6 +33,7 @@ function validateForm() {
     }
 }
 
+// FUNCTION TO CREATE A ITEM WHEN ADDED
 function createItem(id, item) {
     const itemList = document.createElement("div");
     let attr = document.createAttribute("data-id");
@@ -42,6 +47,7 @@ function createItem(id, item) {
     divList.appendChild(itemList);
 }
 
+// FUNCTION TO SHOW THE MESSAGE 3S
 const showMessage = (hasItem) => {
     if (hasItem) {
         const successMsg = `<div id='alert' class='divAlert success'><span>${hasItem} adicionado com sucesso!</span></div>`;
@@ -84,6 +90,7 @@ function clearAll() {
     localStorage.removeItem('list');
 }
 
+// FUNCTIONS TO ADD, GET, REMOVE AND SETUP ITEMS ON LOCALSTORAGE
 function addLocalStorage(id, item) {
     const listItems = { id, item };
     let items = getLocalStorage();
@@ -119,4 +126,5 @@ function setupItems() {
     }
 }
 
+// TO SETUP ITEMS, IF EXISTS, ON LOCALSTORAGE WHEN THE WINDOWS LOAD
 window.onload(setupItems());
